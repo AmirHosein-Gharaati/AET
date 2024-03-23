@@ -1,4 +1,4 @@
-package com.example.aet.model.category;
+package com.example.aet.model;
 
 import lombok.Getter;
 import lombok.Setter;
