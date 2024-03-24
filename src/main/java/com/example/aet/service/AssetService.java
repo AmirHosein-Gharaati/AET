@@ -3,6 +3,7 @@ package com.example.aet.service;
 import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.asset.Asset;
 import com.example.aet.model.asset.dto.AssetRequest;
+import com.example.aet.model.asset.dto.AssetUpdateRequest;
 import com.example.aet.repository.AssetRepository;
 import com.example.aet.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,17 @@ public class AssetService {
 
         itemRepository.deleteAllByAssetIdAndUserId(id, userId);
         assetRepository.deleteById(id);
+    }
+
+    public Asset update(AssetUpdateRequest request, String id, String userId) {
+        Asset asset = assetRepository.findByIdAndUserId(id, userId)
+                .orElseThrow(() -> {
+                    log.error("asset with id {} for user {} not found", id, userId);
+                    return new NotFoundException("asset with id %s for the user not found".formatted(id));
+                });
+
+        asset.setName(request.name());
+
+        return assetRepository.save(asset);
     }
 }

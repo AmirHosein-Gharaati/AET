@@ -2,6 +2,7 @@ package com.example.aet.controller;
 
 import com.example.aet.model.asset.Asset;
 import com.example.aet.model.asset.dto.AssetRequest;
+import com.example.aet.model.asset.dto.AssetUpdateRequest;
 import com.example.aet.model.auth.AetPrincipal;
 import com.example.aet.service.AssetService;
 import jakarta.validation.Valid;
@@ -42,5 +43,15 @@ public class AssetController {
     ) {
         log.info("remove asset {}", id);
         assetService.remove(id, principal.getId());
+    }
+
+    @PatchMapping("/{id}")
+    public Asset update(
+            @AuthenticationPrincipal AetPrincipal principal,
+            @RequestBody @Valid AssetUpdateRequest request,
+            @PathVariable("id") String id
+    ) {
+        log.info("update asset {}", id);
+        return assetService.update(request, id, principal.getId());
     }
 }
