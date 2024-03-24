@@ -6,6 +6,8 @@ import com.example.aet.repository.AssetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AssetService {
@@ -15,5 +17,9 @@ public class AssetService {
     public Asset create(AssetRequest request) {
         Asset asset = new Asset(request);
         return assetRepository.insert(asset);
+    }
+
+    public List<Asset> getAll() {
+        return assetRepository.findAll();
     }
 }

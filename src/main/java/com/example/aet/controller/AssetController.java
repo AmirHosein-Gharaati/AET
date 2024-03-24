@@ -6,10 +6,9 @@ import com.example.aet.service.AssetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/asset")
@@ -23,5 +22,12 @@ public class AssetController {
     public Asset create(@RequestBody @Valid AssetRequest request) {
         log.info("create asset");
         return assetService.create(request);
+    }
+
+    // FIXME: this should be refactored to use JWT token
+    @GetMapping
+    public List<Asset> getAll() {
+        log.info("get all assets");
+        return assetService.getAll();
     }
 }
