@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/asset")
+@RequestMapping("/assets")
 @Slf4j
 @RequiredArgsConstructor
 public class AssetController {
