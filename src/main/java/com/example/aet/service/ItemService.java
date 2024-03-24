@@ -26,4 +26,8 @@ public class ItemService {
         Item item = new Item(request, userId, assetId);
         return itemRepository.insert(item);
     }
+
+    public void delete(String id, String assetId) {
+        itemRepository.deleteByIdAndAssetId(id, assetId);
+    }
 }

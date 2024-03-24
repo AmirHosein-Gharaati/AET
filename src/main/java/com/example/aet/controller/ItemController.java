@@ -26,4 +26,14 @@ public class ItemController {
         log.info("create item user: {}", principal.getUsername());
         return itemService.create(request, principal.getId(), assetId);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(
+            @AuthenticationPrincipal AetPrincipal principal,
+            @PathVariable("id") String itemId,
+            @PathVariable("assetId") String assetId
+    ) {
+        log.info("delete item user: {}", principal.getUsername());
+        itemService.delete(itemId, assetId);
+    }
 }
