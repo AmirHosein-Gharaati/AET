@@ -22,4 +22,8 @@ public class AssetService {
     public List<Asset> getAll() {
         return assetRepository.findAll();
     }
+
+    public void remove(String id) {
+        assetRepository.deleteById(id);
+    }
 }

@@ -30,4 +30,10 @@ public class AssetController {
         log.info("get all assets");
         return assetService.getAll();
     }
+
+    @DeleteMapping("/{id}")
+    public void remove(@PathVariable("id") String id) {
+        log.info("remove asset {}", id);
+        assetService.remove(id);
+    }
 }
