@@ -27,6 +27,7 @@ public class AuthService {
                 .orElseThrow(() -> new BadCredentialsException(INVALID_USERNAME_OR_PASSWORD));
 
         if (!isAuthenticated(user, request.password())) {
+            log.error("password does not match");
             throw new BadCredentialsException(INVALID_USERNAME_OR_PASSWORD);
         }
 
