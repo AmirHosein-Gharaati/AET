@@ -1,5 +1,6 @@
 package com.example.aet.service.jwt;
 
+import com.example.aet.model.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.Optional;
 import java.util.function.Function;
@@ -39,6 +39,15 @@ public class JwtService {
 
         final String jwt = authenticationHeader.substring(TOKEN_PREFIX.length());
         return Optional.of(jwt);
+    }
+
+    public String generateToken(User user) {
+        return Jwts.builder()
+                .subject(user.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSignInKey())
+                .compact();
     }
 
     public boolean isValidToken(String token) {

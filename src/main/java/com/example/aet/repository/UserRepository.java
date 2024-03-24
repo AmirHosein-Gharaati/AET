@@ -1,6 +1,6 @@
 package com.example.aet.repository;
 
-import com.example.aet.model.User;
+import com.example.aet.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

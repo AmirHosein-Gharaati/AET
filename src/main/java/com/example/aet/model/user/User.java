@@ -1,4 +1,4 @@
-package com.example.aet.model;
+package com.example.aet.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
