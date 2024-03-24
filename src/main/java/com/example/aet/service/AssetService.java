@@ -4,6 +4,7 @@ import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.asset.Asset;
 import com.example.aet.model.asset.dto.AssetRequest;
 import com.example.aet.repository.AssetRepository;
+import com.example.aet.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 public class AssetService {
 
     private final AssetRepository assetRepository;
+    private final ItemRepository itemRepository;
 
     public Asset create(AssetRequest request, String userId) {
         Asset asset = new Asset(request, userId);
@@ -31,6 +33,8 @@ public class AssetService {
             log.error("asset does not exist with id {} for user {}", id, userId);
             throw new NotFoundException("asset does not exist with id %s for the user".formatted(id));
         }
+
+        itemRepository.deleteAllByAssetIdAndUserId(id, userId);
         assetRepository.deleteById(id);
     }
 }
