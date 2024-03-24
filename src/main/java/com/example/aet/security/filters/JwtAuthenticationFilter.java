@@ -1,4 +1,4 @@
-package com.example.aet.security;
+package com.example.aet.security.filters;
 
 import com.example.aet.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;

@@ -1,6 +1,6 @@
 package com.example.aet.config;
 
-import com.example.aet.exception.UserNotFoundException;
+import com.example.aet.exception.model.UserNotFoundException;
 import com.example.aet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

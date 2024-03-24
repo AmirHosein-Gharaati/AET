@@ -1,8 +1,10 @@
 package com.example.aet.exception;
 
+import com.example.aet.exception.model.AetException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,5 +18,10 @@ public class ExceptionHandlerController {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.getMessage());
         problemDetail.setTitle("Bad credentials");
         return problemDetail;
+    }
+
+    @ExceptionHandler(AetException.class)
+    public ProblemDetail handleAetException(AetException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
     }
 }
