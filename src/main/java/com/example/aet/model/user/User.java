@@ -1,6 +1,5 @@
 package com.example.aet.model.user;
 
-import com.example.aet.model.user.dto.SignUpRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
