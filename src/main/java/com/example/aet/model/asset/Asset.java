@@ -21,8 +21,9 @@ public class Asset {
     private String currency;
     private LocalDateTime createdAt;
 
-    public Asset(AssetRequest request) {
+    public Asset(AssetRequest request, String userId) {
         this.name = request.name();
+        this.userId = userId;
         this.currency = request.currency();
         this.createdAt = LocalDateTime.now();
     }
