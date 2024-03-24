@@ -1,6 +1,8 @@
 package com.example.aet.model.user;
 
+import com.example.aet.model.user.dto.SignUpRequest;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,11 +15,17 @@ import java.util.List;
 @Getter
 @Setter
 @Document("users")
+@NoArgsConstructor
 public class User implements UserDetails {
     @Id
     private String id;
-    private String userName;
+    private String username;
     private String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -31,7 +39,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override

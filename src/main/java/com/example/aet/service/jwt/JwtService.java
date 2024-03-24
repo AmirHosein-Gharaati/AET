@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -16,7 +17,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static com.example.aet.service.jwt.Constants.TOKEN_PREFIX;
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
 @Slf4j
@@ -29,7 +29,7 @@ public class JwtService {
     private long expiration;
 
     public Optional<String> extractJwtToken(HttpServletRequest request) {
-        final String authenticationHeader = request.getHeader(AUTHORIZATION);
+        final String authenticationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         log.debug("jwt token: {}", authenticationHeader);
 

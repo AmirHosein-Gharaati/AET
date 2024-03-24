@@ -2,6 +2,7 @@ package com.example.aet.controller;
 
 import com.example.aet.model.user.dto.LoginRequest;
 import com.example.aet.model.user.dto.AuthenticationDetail;
+import com.example.aet.model.user.dto.SignUpRequest;
 import com.example.aet.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,11 @@ public class AuthController {
     public AuthenticationDetail login(@RequestBody @Valid LoginRequest request) {
         log.info("login with username: {}", request.username());
         return authService.login(request);
+    }
+
+    @PostMapping("/signup")
+    public AuthenticationDetail signup(@RequestBody @Valid SignUpRequest request) {
+        log.info("signup with username: {}", request.username());
+        return authService.signup(request);
     }
 }
