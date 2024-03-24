@@ -1,6 +1,7 @@
 package com.example.aet.exception;
 
 import com.example.aet.exception.model.AetException;
+import com.example.aet.exception.model.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;

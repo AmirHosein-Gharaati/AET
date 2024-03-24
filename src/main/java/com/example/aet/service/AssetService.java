@@ -1,6 +1,6 @@
 package com.example.aet.service;
 
-import com.example.aet.exception.NotFoundException;
+import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.asset.Asset;
 import com.example.aet.model.asset.dto.AssetRequest;
 import com.example.aet.repository.AssetRepository;

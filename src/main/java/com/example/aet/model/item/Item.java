@@ -16,8 +16,8 @@ public class Item {
     private String id;
     private String assetId;
     private String userId;
-    private long amount;
-    private long value;
+    private double amount;
+    private double value;
     private LocalDateTime date;
 
     public Item(ItemRequest request, String userId, String assetId) {
