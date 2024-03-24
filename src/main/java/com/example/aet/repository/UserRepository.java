@@ -1,0 +1,10 @@
+package com.example.aet.repository;
+
+import com.example.aet.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends MongoRepository<User, String> {
+    Optional<User> findByUserName(String userName);
+}
