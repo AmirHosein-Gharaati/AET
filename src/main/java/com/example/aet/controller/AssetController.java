@@ -1,6 +1,7 @@
 package com.example.aet.controller;
 
 import com.example.aet.model.asset.Asset;
+import com.example.aet.model.asset.dto.AssetFraction;
 import com.example.aet.model.asset.dto.AssetRequest;
 import com.example.aet.model.asset.dto.AssetUpdateRequest;
 import com.example.aet.model.auth.AetPrincipal;
@@ -31,9 +32,18 @@ public class AssetController {
     }
 
     @GetMapping
-    public List<Asset> getAll(@AuthenticationPrincipal AetPrincipal principal) {
+    public List<AssetFraction> getAll(@AuthenticationPrincipal AetPrincipal principal) {
         log.info("get all assets for user: {}", principal.getUsername());
         return assetService.getAll(principal.getId());
+    }
+
+    @GetMapping("/{id}")
+    public Asset get(
+            @AuthenticationPrincipal AetPrincipal principal,
+            @PathVariable("id") String id
+    ) {
+        log.info("get single asset for user: {}", principal.getUsername());
+        return assetService.get(id, principal.getId());
     }
 
     @DeleteMapping("/{id}")

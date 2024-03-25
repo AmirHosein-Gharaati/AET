@@ -2,6 +2,7 @@ package com.example.aet.service;
 
 import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.asset.Asset;
+import com.example.aet.model.asset.dto.AssetFraction;
 import com.example.aet.model.asset.dto.AssetRequest;
 import com.example.aet.model.asset.dto.AssetUpdateRequest;
 import com.example.aet.repository.AssetRepository;
@@ -25,8 +26,17 @@ public class AssetService {
         return assetRepository.insert(asset);
     }
 
-    public List<Asset> getAll(String userId) {
-        return assetRepository.findByUserId(userId);
+    public List<AssetFraction> getAll(String userId) {
+        return assetRepository.findByUserId(userId).stream()
+                .map(AssetFraction::new).toList();
+    }
+
+    public Asset get(String id, String userId) {
+        return assetRepository.findByIdAndUserId(id, userId)
+                .orElseThrow(() -> {
+                    log.error("asset does not exist with id {} for user {}", id, userId);
+                    return new NotFoundException("asset does not exist with id %s for the user".formatted(id));
+                });
     }
 
     public void remove(String id, String userId) {
