@@ -5,7 +5,7 @@ import com.example.aet.model.asset.Asset;
 import com.example.aet.model.item.Item;
 import com.example.aet.model.item.dto.ItemRequest;
 import com.example.aet.repository.AssetRepository;
-import com.example.aet.repository.ItemRepository;
+import com.example.aet.repository.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

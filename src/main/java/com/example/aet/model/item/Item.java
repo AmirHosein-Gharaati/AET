@@ -2,6 +2,7 @@ package com.example.aet.model.item;
 
 import com.example.aet.model.item.dto.ItemRequest;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Document("items")
+@NoArgsConstructor
 public class Item {
     @Id
     private String id;

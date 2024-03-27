@@ -3,6 +3,7 @@ package com.example.aet.controller;
 import com.example.aet.model.asset.Asset;
 import com.example.aet.model.asset.dto.AssetFraction;
 import com.example.aet.model.asset.dto.AssetRequest;
+import com.example.aet.model.asset.dto.AssetSummary;
 import com.example.aet.model.asset.dto.AssetUpdateRequest;
 import com.example.aet.model.auth.AetPrincipal;
 import com.example.aet.service.AssetService;
@@ -44,6 +45,15 @@ public class AssetController {
     ) {
         log.info("get single asset for user: {}", principal.getUsername());
         return assetService.get(id, principal.getId());
+    }
+
+    @GetMapping("/{id}/summary")
+    public AssetSummary getSummary(
+            @AuthenticationPrincipal AetPrincipal principal,
+            @PathVariable("id") String id
+    ) {
+        log.info("get asset summary {} for user {}", id, principal.getId());
+        return assetService.getSummary(id, principal.getId());
     }
 
     @DeleteMapping("/{id}")
