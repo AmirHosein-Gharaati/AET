@@ -5,14 +5,16 @@ import com.example.aet.model.asset.Asset;
 public record AssetFraction(
         String id,
         String name,
-        String currency,
+        String currencyFrom,
+        String currencyTo,
         Double totalAmount
 ) {
     public AssetFraction(Asset asset) {
         this(
                 asset.getId(),
                 asset.getName(),
-                asset.getCurrency(),
+                asset.getCurrencyFrom(),
+                asset.getCurrencyTo(),
                 asset.getTotalAmount()
         );
     }

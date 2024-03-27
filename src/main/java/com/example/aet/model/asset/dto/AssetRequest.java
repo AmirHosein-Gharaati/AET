@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotEmpty;
 public record AssetRequest(
         @NotEmpty(message = "name may not be empty")
         String name,
-        @NotEmpty(message = "currency may not be empty")
-        String currency
+        @NotEmpty(message = "currencyFrom may not be empty")
+        String currencyFrom,
+        @NotEmpty(message = "currencyTo may not be empty")
+        String currencyTo
 ) {
 }

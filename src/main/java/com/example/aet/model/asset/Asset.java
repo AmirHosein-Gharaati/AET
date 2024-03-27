@@ -18,7 +18,8 @@ public class Asset {
     private String id;
     private String userId;
     private String name;
-    private String currency;
+    private String currencyFrom;
+    private String currencyTo;
     private double totalAmount;
     private double totalCost;
     private LocalDateTime createdAt;
@@ -26,7 +27,8 @@ public class Asset {
     public Asset(AssetRequest request, String userId) {
         this.name = request.name();
         this.userId = userId;
-        this.currency = request.currency();
+        this.currencyFrom = request.currencyFrom();
+        this.currencyTo = request.currencyTo();
         this.totalAmount = 0;
         this.totalCost = 0;
         this.createdAt = LocalDateTime.now();
