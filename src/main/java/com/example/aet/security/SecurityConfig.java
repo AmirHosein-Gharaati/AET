@@ -27,6 +27,8 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(httpSecurity -> httpSecurity
                         .requestMatchers("/auth/login", "/auth/signup").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/health", "/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->
