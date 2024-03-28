@@ -26,12 +26,8 @@ public class CustomHttp403ForbiddenEntryPoint implements AuthenticationEntryPoin
         log.info("request is: {}", request.getRequestURL());
 
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(403);
 
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
-                HttpStatus.FORBIDDEN,
-                "you need to login first in order to perform this action"
-        );
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, ex.getMessage());
         problemDetail.setInstance(new URI(request.getContextPath() + request.getServletPath()));
 
         response.getWriter().write(SecurityHelpers.toString(problemDetail));
