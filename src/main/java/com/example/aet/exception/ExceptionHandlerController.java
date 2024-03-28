@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,5 +35,20 @@ public class ExceptionHandlerController {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         problemDetail.setTitle("Not Found");
         return problemDetail;
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ProblemDetail handleValidationExceptions(MethodArgumentNotValidException ex) {
+        ProblemDetail response = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
+        response.setTitle("Argument Not Valid");
+
+        String errorMessage = ex.getAllErrors().stream().map(objectError -> {
+            if (objectError instanceof FieldError fieldError) {
+                return fieldError.getField() + ": " + fieldError.getDefaultMessage();
+            }
+            return objectError.getDefaultMessage();
+        }).collect(Collectors.joining(", "));
+        response.setDetail(errorMessage);
+        return response;
     }
 }
