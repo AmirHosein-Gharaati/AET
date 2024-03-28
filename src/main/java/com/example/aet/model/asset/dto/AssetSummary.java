@@ -19,8 +19,8 @@ public record AssetSummary(
                 asset.getId(),
                 asset.getTotalCost(),
                 asset.getTotalAmount(),
-                asset.getCurrencyFrom(),
-                asset.getCurrencyTo(),
+                asset.getPair().from(),
+                asset.getPair().to(),
                 items.stream().map(ItemFraction::new).toList()
         );
     }

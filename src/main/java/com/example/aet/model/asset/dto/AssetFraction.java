@@ -7,6 +7,7 @@ public record AssetFraction(
         String name,
         String currencyFrom,
         String currencyTo,
+        Double currentPrice,
         Double totalAmount,
         Double totalCost
 ) {
@@ -14,8 +15,9 @@ public record AssetFraction(
         this(
                 asset.getId(),
                 asset.getName(),
-                asset.getCurrencyFrom(),
-                asset.getCurrencyTo(),
+                asset.getPair().from(),
+                asset.getPair().to(),
+                asset.getCurrentPrice(),
                 asset.getTotalAmount(),
                 asset.getTotalCost()
         );
