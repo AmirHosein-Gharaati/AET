@@ -44,6 +44,7 @@ public class ImageController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(loadFile.fileType()))
+                .contentLength(loadFile.bytes().length)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"%s\"".formatted(loadFile.filename()))
                 .body(loadFile.bytes());
     }
