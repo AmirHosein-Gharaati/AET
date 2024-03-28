@@ -58,11 +58,7 @@ public class AssetService {
     }
 
     public Asset update(AssetUpdateRequest request, String id, String userId) {
-        Asset asset = assetRepository.findByIdAndUserId(id, userId)
-                .orElseThrow(() -> {
-                    log.error("asset with id {} for user {} not found", id, userId);
-                    return new NotFoundException("asset with id %s for the user not found".formatted(id));
-                });
+        Asset asset = get(id, userId);
 
         updateAsset(request, asset);
 
