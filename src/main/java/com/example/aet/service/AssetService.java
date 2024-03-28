@@ -64,8 +64,13 @@ public class AssetService {
                     return new NotFoundException("asset with id %s for the user not found".formatted(id));
                 });
 
-        asset.setName(request.name());
+        updateAsset(request, asset);
 
         return assetRepository.save(asset);
+    }
+
+    private void updateAsset(AssetUpdateRequest request, Asset asset) {
+        if (request.name() != null) asset.setName(request.name());
+        if (request.currentPrice() != null) asset.setCurrentPrice(request.currentPrice());
     }
 }
