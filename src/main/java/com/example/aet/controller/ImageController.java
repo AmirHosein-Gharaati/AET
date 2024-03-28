@@ -40,7 +40,7 @@ public class ImageController {
             @PathVariable("id") String id
     ) {
         log.info("download image {} for user {}", id, principal.getId());
-        LoadFile loadFile = imageService.downloadFile(id);
+        LoadFile loadFile = imageService.downloadFile(id, principal.getId());
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(loadFile.fileType()))

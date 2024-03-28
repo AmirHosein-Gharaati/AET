@@ -1,17 +1,25 @@
 package com.example.aet.repository.image;
 
 import com.example.aet.exception.model.FileUploadException;
+import com.example.aet.exception.model.NotFoundException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class CustomImageRepositoryImpl implements CustomImageRepository {
     private final GridFsTemplate gridFsTemplate;
 
@@ -31,9 +39,28 @@ public class CustomImageRepositoryImpl implements CustomImageRepository {
                     metadata
             );
         } catch (IOException e) {
-            throw new FileUploadException(e.getMessage());
+            log.error("error while saving file to database: {}", e.getMessage());
+            throw new FileUploadException("error while saving file to database: %s".formatted(e.getMessage()));
         }
 
         return fileID.toString();
+    }
+
+    @Override
+    public Optional<GridFSFile> find(String id, String userId) {
+        List<Criteria> criteriaList = List.of(
+                Criteria.where("_id").is(id),
+                Criteria.where("metadata.userId").is(userId)
+        );
+
+        GridFSFile gridFSFile = gridFsTemplate.findOne(
+                new Query(new Criteria().andOperator(criteriaList))
+        );
+
+        if (gridFSFile == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(gridFSFile);
     }
 }
