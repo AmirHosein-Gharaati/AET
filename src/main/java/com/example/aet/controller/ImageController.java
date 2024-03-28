@@ -29,7 +29,7 @@ public class ImageController {
     ) {
         log.info("upload file for user {}", principal.getId());
 
-        String imageId = imageService.addFile(file);
+        String imageId = imageService.save(file, principal.getId());
 
         return new ResponseEntity<>(imageId, HttpStatus.OK);
     }

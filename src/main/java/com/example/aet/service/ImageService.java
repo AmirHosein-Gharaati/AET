@@ -1,11 +1,9 @@
 package com.example.aet.service;
 
 import com.example.aet.exception.model.FileDownloadException;
-import com.example.aet.exception.model.FileUploadException;
 import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.image.dto.LoadFile;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+import com.example.aet.repository.image.CustomImageRepository;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,28 +21,12 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 public class ImageService {
-
     private final GridFsTemplate gridFsTemplate;
     private final GridFsOperations gridFsOperations;
+    private final CustomImageRepository imageRepository;
 
-    public String addFile(MultipartFile upload) {
-
-        DBObject metadata = new BasicDBObject();
-        metadata.put("fileSize", upload.getSize());
-
-        Object fileID;
-        try {
-            fileID = gridFsTemplate.store(
-                    upload.getInputStream(),
-                    upload.getOriginalFilename(),
-                    upload.getContentType(),
-                    metadata
-            );
-        } catch (IOException e) {
-            throw new FileUploadException(e.getMessage());
-        }
-
-        return fileID.toString();
+    public String save(MultipartFile file, String userId) {
+        return imageRepository.save(file, userId);
     }
 
     public LoadFile downloadFile(String id) {
