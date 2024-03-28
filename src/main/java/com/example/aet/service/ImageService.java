@@ -3,6 +3,7 @@ package com.example.aet.service;
 import com.example.aet.exception.model.FileDownloadException;
 import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.image.dto.LoadFile;
+import com.example.aet.model.image.dto.UploadResponse;
 import com.example.aet.repository.image.CustomImageRepository;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class ImageService {
     private final CustomImageRepository imageRepository;
     private final GridFsOperations gridFsOperations;
 
-    public String save(MultipartFile file, String userId) {
-        return imageRepository.save(file, userId);
+    public UploadResponse save(MultipartFile file, String userId) {
+        String imageId = imageRepository.save(file, userId);
+        return new UploadResponse(imageId);
     }
 
     public LoadFile downloadFile(String id, String userId) {

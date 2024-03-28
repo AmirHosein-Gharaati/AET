@@ -2,6 +2,7 @@ package com.example.aet.controller;
 
 import com.example.aet.model.auth.AetPrincipal;
 import com.example.aet.model.image.dto.LoadFile;
+import com.example.aet.model.image.dto.UploadResponse;
 import com.example.aet.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +24,15 @@ public class ImageController {
     private final ImageService imageService;
 
     @PostMapping
-    public ResponseEntity<String> upload(
+    public ResponseEntity<UploadResponse> upload(
             @AuthenticationPrincipal AetPrincipal principal,
             @RequestParam("file") MultipartFile file
     ) {
         log.info("upload file for user {}", principal.getId());
 
-        String imageId = imageService.save(file, principal.getId());
+        UploadResponse imageResponse = imageService.save(file, principal.getId());
 
-        return new ResponseEntity<>(imageId, HttpStatus.OK);
+        return new ResponseEntity<>(imageResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
