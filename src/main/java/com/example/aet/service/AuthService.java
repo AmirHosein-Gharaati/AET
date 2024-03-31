@@ -1,9 +1,11 @@
 package com.example.aet.service;
 
+import com.example.aet.exception.model.NotFoundException;
 import com.example.aet.model.user.User;
 import com.example.aet.model.user.dto.AuthenticationDetail;
 import com.example.aet.model.user.dto.LoginRequest;
 import com.example.aet.model.user.dto.SignUpRequest;
+import com.example.aet.model.user.dto.UserFraction;
 import com.example.aet.repository.UserRepository;
 import com.example.aet.service.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +47,16 @@ public class AuthService {
 
         String token = jwtService.generateToken(user);
         return new AuthenticationDetail(token);
+    }
+
+    public UserFraction whoami(String userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> {
+                    log.error("user not found with id {}", userId);
+                    return new NotFoundException("user not found with id %s".formatted(userId));
+                });
+
+        return new UserFraction(user);
     }
 
     private void validate(SignUpRequest request) {
