@@ -36,12 +36,9 @@ public class ImageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> download(
-            @AuthenticationPrincipal AetPrincipal principal,
-            @PathVariable("id") String id
-    ) {
-        log.info("download image {} for user {}", id, principal.getId());
-        LoadFile loadFile = imageService.downloadFile(id, principal.getId());
+    public ResponseEntity<byte[]> download(@PathVariable("id") String id) {
+        log.info("download image {}", id);
+        LoadFile loadFile = imageService.downloadFile(id);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(loadFile.fileType()))

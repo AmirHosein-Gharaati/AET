@@ -47,14 +47,9 @@ public class CustomImageRepositoryImpl implements CustomImageRepository {
     }
 
     @Override
-    public Optional<GridFSFile> find(String id, String userId) {
-        List<Criteria> criteriaList = List.of(
-                Criteria.where("_id").is(id),
-                Criteria.where("metadata.userId").is(userId)
-        );
-
+    public Optional<GridFSFile> find(String id) {
         GridFSFile gridFSFile = gridFsTemplate.findOne(
-                new Query(new Criteria().andOperator(criteriaList))
+                new Query(Criteria.where("_id").is(id))
         );
 
         if (gridFSFile == null) {

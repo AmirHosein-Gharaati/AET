@@ -68,5 +68,6 @@ public class AssetService {
     private void updateAsset(AssetUpdateRequest request, Asset asset) {
         if (request.name() != null) asset.setName(request.name());
         if (request.currentPrice() != null) asset.setCurrentPrice(request.currentPrice());
+        if (request.imageId() != null) asset.setImageId(request.imageId());
     }
 }

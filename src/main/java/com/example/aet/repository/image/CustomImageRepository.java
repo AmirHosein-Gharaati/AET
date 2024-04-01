@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CustomImageRepository {
     String save(MultipartFile file, String userId);
-    Optional<GridFSFile> find(String id, String userId);
+    Optional<GridFSFile> find(String id);
 }

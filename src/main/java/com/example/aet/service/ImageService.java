@@ -27,8 +27,8 @@ public class ImageService {
         return new UploadResponse(imageId);
     }
 
-    public LoadFile downloadFile(String id, String userId) {
-        GridFSFile image = imageRepository.find(id, userId)
+    public LoadFile downloadFile(String id) {
+        GridFSFile image = imageRepository.find(id)
                 .orElseThrow(() -> {
                     log.error("could not find image with id {}", id);
                     return new NotFoundException("could not find image with id %s".formatted(id));

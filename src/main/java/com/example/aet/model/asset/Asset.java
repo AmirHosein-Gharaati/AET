@@ -17,6 +17,7 @@ public class Asset {
     @Id
     private String id;
     private String userId;
+    private String imageId;
     private String name;
     private CurrencyPair pair;
     private double currentPrice;
