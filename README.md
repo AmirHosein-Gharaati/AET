@@ -6,7 +6,7 @@ You can add and track your assets and check the total amount, total cost and
 calculate gain/loss.
 
 
-## API Documentaion
+## API Documentation
 
 You can check swagger UI for APIs here:
 
