@@ -8,6 +8,9 @@ import java.util.List;
 
 public record AssetSummary(
         String id,
+        String name,
+        String imageId,
+        Double currentPrice,
         Double totalCost,
         Double totalAmount,
         String currencyFrom,
@@ -17,6 +20,9 @@ public record AssetSummary(
     public AssetSummary(Asset asset, List<Item> items) {
         this(
                 asset.getId(),
+                asset.getName(),
+                asset.getImageId(),
+                asset.getCurrentPrice(),
                 asset.getTotalCost(),
                 asset.getTotalAmount(),
                 asset.getPair().from(),
