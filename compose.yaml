@@ -36,6 +36,15 @@ services:
     ports:
       - "3000:3000"
 
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: aet_loki
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    networks:
+      - aet-network
+
 
 volumes:
   mongodb_data:
