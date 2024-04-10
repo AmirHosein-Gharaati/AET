@@ -26,7 +26,10 @@ public class AuthService {
 
     public AuthenticationDetail login(LoginRequest request) {
         User user = userRepository.findByUsername(request.username())
-                .orElseThrow(() -> new BadCredentialsException(INVALID_USERNAME_OR_PASSWORD));
+                .orElseThrow(() -> {
+                    log.error("invalid username or password for username: {}", request.username());
+                    return new BadCredentialsException(INVALID_USERNAME_OR_PASSWORD);
+                });
 
         if (!isAuthenticated(user, request.password())) {
             log.error("password does not match");
