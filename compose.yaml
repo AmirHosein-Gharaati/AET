@@ -13,8 +13,10 @@ services:
     image: prom/prometheus:v2.50.0
     container_name: aet_prometheus
     restart: always
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./env/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
     networks:
