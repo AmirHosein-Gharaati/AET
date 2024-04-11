@@ -53,3 +53,19 @@ Activate the local profile of spring boot and run the jar file:
 ```bash
 java -jar -Dspring.profiles.active=local ./target/aet-0.0.1-SNAPSHOT.jar
 ```
+
+## Observability
+
+You can check the visualized data about metrics and logs in grafana dashboard in:
+
+`http://localhost:3000`
+
+**Note**: Default username is `admin` and default password is `admin`  
+
+
+## Features
+- Spring Security and JWT authentication
+- Observability using Grafana, Prometheus, and Loki
+- Spring Boot Docker Compose plugin
+- Exception Handling by RFC 7807 specification
+- Lombok
