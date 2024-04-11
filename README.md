@@ -14,17 +14,15 @@ http://localhost:8080/aet/v1/swagger-ui/index.html
 
 ## Usage
 
-**Requirements**:
+### Requirements:
  - Java OpenJDK v21
  - MongoDB v5
  - Docker
  - Maven
 
 
+### Docker Compose
 
-### Local
-
-#### Docker Compose
 If you are using Intellij, run the project using maven profiles and check
 `compose` profile.
 
@@ -39,5 +37,19 @@ If wanted to stop the services:
 ```bash
 docker compose down
 ```
-#### properties
-Use Intellij or another IDE to specify the properties to `application-local.properties`
+
+### Build
+Build the project using maven:
+```bash
+mvn clean package
+```
+
+### Run
+Make sure before running the project, use the correct credentials for MongoDB in the proper
+profile (if running locally, update `application-local.properties`)
+
+Activate the local profile of spring boot and run the jar file:
+
+```bash
+java -jar -Dspring.profiles.active=local ./target/aet-0.0.1-SNAPSHOT.jar
+```
