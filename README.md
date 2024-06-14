@@ -5,6 +5,15 @@ This project's main focus is on learning and using spring boot as the backend.
 You can add and track your assets and check the total amount, total cost and 
 calculate gain/loss.
 
+## Demo
+
+### Swagger UI
+![](media/swagger-1.png)
+![](media/swagger-2.png)
+
+### Grafana
+![](media/grafana-prometheus.png)
+![](media/grafana-loki.png)
 
 ## API Documentation
 

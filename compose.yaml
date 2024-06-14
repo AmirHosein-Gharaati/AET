@@ -22,7 +22,6 @@ services:
     networks:
       - aet-network
 
-    #    TODO: I don't know this
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
